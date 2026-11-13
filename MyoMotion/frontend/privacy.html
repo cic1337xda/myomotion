@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — MyoMotion</title>
+  <meta name="description" content="Data governance, biometrics telemetry security, and patient confidentiality standards for MyoMotion platform.">
+  <link rel="canonical" href="https://myomotion.flowkraft.xyz/privacy">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Privacy Policy — MyoMotion">
+  <meta property="og:description" content="Data governance, biometrics telemetry security, and confidentiality standards for MyoMotion.">
+  <meta property="og:url" content="https://myomotion.flowkraft.xyz/privacy">
+  <meta property="og:image" content="https://myomotion.flowkraft.xyz/og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Privacy Policy — MyoMotion">
+  <meta name="twitter:description" content="Data governance and biometrics telemetry security for MyoMotion.">
+  <meta name="twitter:image" content="https://myomotion.flowkraft.xyz/og-preview.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="dark">
+
+  <div class="ambient-glow">
+    <div class="ambient-sphere sphere-blue"></div>
+  </div>
+
+  <div class="standalone-page">
+    <header class="standalone-header liquid-glass">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="/favicon.svg" alt="MyoMotion Logo" style="width: 26px; height: 26px; border-radius: 6px;">
+        <span style="font-size: 15px; font-weight: 800;">MyoMotion</span>
+      </div>
+      <a href="/" class="liquid-btn" style="padding: 6px 14px; font-size: 12px;">&larr; Back to App</a>
+    </header>
+
+    <main class="standalone-main liquid-glass" style="padding: 36px 32px;">
+      <h1 style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px;">Privacy Policy &amp; Data Security</h1>
+      <p style="font-size: 13px; color: var(--text-tertiary); margin-bottom: 28px;">Last updated: October 2026 &bull; Compliant with Clinical Research Standards</p>
+
+      <section style="display: flex; flex-direction: column; gap: 20px; font-size: 14px; line-height: 1.7; color: var(--text-secondary);">
+        <div>
+          <h2 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">1. Biometric Data Collection</h2>
+          <p>
+            MyoMotion collects real-time upper-limb kinematics (elbow flexion angles and wrist curl sagittal pitch) and surface electromyography (MyoWare 2.0 sEMG voltages and %MVC) strictly for therapeutic rehabilitation biofeedback.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">2. Cryptographic Storage &amp; Token Architecture</h2>
+          <p>
+            All authentication tokens are transmitted exclusively inside encrypted, server-side <code style="color: var(--apple-blue);">HttpOnly, SameSite=Lax</code> cookies. Tokens are strictly shielded from client-side JavaScript to eliminate Cross-Site Scripting (XSS) risks.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">3. Data Ownership &amp; Authorization Enforcement</h2>
+          <p>
+            Every database transaction executes parameterized queries via SQLAlchemy ORM. Server-side access control guarantees clinicians and patients can only access devices and rehabilitation logs linked to their authenticated account.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">4. Multi-Factor OTP Verification</h2>
+          <p>
+            Account creation and password recovery require 6-digit one-time authorization codes dispatched via the Resend API from <code style="color: var(--apple-blue);">myomotion@mail.flowkraft.xyz</code>. OTP codes expire automatically within 5 minutes.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" style="border-top: none;">
+      <div>&copy; <span id="copyright-year">2026</span> MyoMotion Clinical Systems &bull; flowkraft.xyz</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("copyright-year").textContent = new Date().getFullYear();
+    const savedTheme = localStorage.getItem("myomotion_theme") || "dark";
+    if (savedTheme === "light") document.body.classList.remove("dark");
+  </script>
+</body>
+</html>

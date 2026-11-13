@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyoMotion — Clinical Biomechanics & Neuromuscular Rehabilitation</title>
+  <meta name="description" content="Advanced upper-limb neuromuscular rehabilitation platform tracking elbow & wrist kinematics coupled with real-time sEMG biofeedback.">
+  <link rel="canonical" href="https://myomotion.flowkraft.xyz/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MyoMotion — Clinical Biomechanics & Neuromuscular Rehabilitation">
+  <meta property="og:description" content="Advanced upper-limb neuromuscular rehabilitation platform tracking elbow & wrist kinematics coupled with real-time sEMG biofeedback.">
+  <meta property="og:url" content="https://myomotion.flowkraft.xyz/">
+  <meta property="og:image" content="https://myomotion.flowkraft.xyz/og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MyoMotion — Clinical Biomechanics & Neuromuscular Rehabilitation">
+  <meta name="twitter:description" content="Upper-limb elbow & wrist curl rehabilitation platform with MyoWare 2.0 sEMG biofeedback.">
+  <meta name="twitter:image" content="https://myomotion.flowkraft.xyz/og-preview.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- Structured Data: Clinical Application & Organization + BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "MyoMotion Clinical Rehabilitation Platform",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web, Embedded ESP32",
+        "description": "Upper-limb dual-joint kinematic tracking with surface electromyography biofeedback.",
+        "author": {
+          "@type": "Organization",
+          "name": "MyoMotion Medical",
+          "url": "https://myomotion.flowkraft.xyz"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://myomotion.flowkraft.xyz/" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="dark">
+
+  <!-- Ambient Optical Glow Background -->
+  <div class="ambient-glow">
+    <div class="ambient-sphere sphere-blue"></div>
+    <div class="ambient-sphere sphere-green"></div>
+  </div>
+
+  <!-- Toast Notification Hub -->
+  <div id="toast-container"></div>
+
+  <div class="app-layout">
+    <!-- Floating Liquid Glass Sidebar -->
+    <aside class="sidebar liquid-glass">
+      <div>
+        <div class="sidebar-brand">
+          <div class="brand-header">
+            <img src="/favicon.svg" alt="MyoMotion Logo" class="brand-logo">
+            <div>
+              <div class="brand-title">MyoMotion</div>
+              <div class="brand-sub">Clinical Biomechanics</div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main Navigation">
+          <a href="/" class="nav-item active">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Overview</span>
+          </a>
+
+          <a href="/rehab" class="nav-item">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+            <span>Active Rehab</span>
+          </a>
+
+          <a href="/history" class="nav-item">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20v-6M6 20V10M18 20V4"></path>
+            </svg>
+            <span>History & Analytics</span>
+          </a>
+
+          <a href="/settings" class="nav-item">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span>Device Settings</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- User Info & Theme Controls -->
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-row">
+            <div class="user-meta">
+              <span id="sidebar-user-name" class="user-name">Loading...</span>
+              <span id="sidebar-user-role" class="user-role-badge">Physio</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button id="theme-toggle-btn" class="liquid-btn" style="flex: 1; padding: 6px 10px; font-size: 11px;">Theme</button>
+            <button id="sidebar-logout-btn" class="liquid-btn liquid-btn-danger" style="padding: 6px 10px; font-size: 11px;">Logout</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Stream -->
+    <main class="main-content">
+      <!-- Breadcrumb & Top Bar -->
+      <header class="top-header liquid-glass">
+        <div>
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <span class="current">Overview</span>
+          </nav>
+          <h1 class="page-title">Biomechanical Rehabilitation Command</h1>
+        </div>
+
+        <div class="header-actions">
+          <div class="status-pill">
+            <div id="device-status-dot" class="status-dot offline"></div>
+            <span id="device-status-text">Checking Node...</span>
+          </div>
+          <a href="/rehab" class="liquid-btn liquid-btn-primary">Start Therapy &rarr;</a>
+        </div>
+      </header>
+
+      <!-- High-Level Metric Tiles -->
+      <section class="stats-grid">
+        <div class="stat-card liquid-glass">
+          <div class="stat-header">
+            <span class="stat-label">Total Sessions</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--apple-blue)" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <div id="overview-total-sessions" class="stat-value">0</div>
+          <div class="stat-sub">Archived therapy sessions</div>
+        </div>
+
+        <div class="stat-card liquid-glass">
+          <div class="stat-header">
+            <span class="stat-label">Total Repetitions</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--apple-green)" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <div id="overview-total-reps" class="stat-value">0</div>
+          <div class="stat-sub">Completed joint cycles</div>
+        </div>
+
+        <div class="stat-card liquid-glass">
+          <div class="stat-header">
+            <span class="stat-label">Peak Neuromuscular Effort</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--apple-orange)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+          </div>
+          <div id="overview-peak-mvc" class="stat-value">0%</div>
+          <div class="stat-sub">Maximum Voluntary Contraction</div>
+        </div>
+
+        <div class="stat-card liquid-glass">
+          <div class="stat-header">
+            <span class="stat-label">Target Kinematics</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--apple-purple)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+          </div>
+          <div class="stat-value" style="font-size: 20px;">Elbow &amp; Wrist</div>
+          <div class="stat-sub">Biceps &amp; Forearm Biofeedback</div>
+        </div>
+      </section>
+
+      <!-- Quick Action Cards -->
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+        <!-- Elbow Card -->
+        <article class="liquid-glass" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <span class="user-role-badge" style="background: rgba(0, 122, 255, 0.15); color: var(--apple-blue);">1-DoF Sagittal</span>
+              <span style="font-size: 11px; color: var(--text-tertiary);">Dual BNO055 Fusion</span>
+            </div>
+            <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">Elbow Joint Flexion / Extension</h2>
+            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+              Monitors humerus-to-forearm relative displacement using orientation quaternions with magnetic interference decoupling, alongside Biceps Brachii sEMG envelope tracking.
+            </p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--track-border); padding-top: 14px;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-primary);">Calibrated Straight &rarr; Max Flex</span>
+            <a href="/rehab" onclick="localStorage.setItem('myomotion_target_mode', 'elbow');" class="liquid-btn liquid-btn-primary" style="padding: 8px 14px; font-size: 12px;">
+              Launch Elbow Mode
+            </a>
+          </div>
+        </article>
+
+        <!-- Wrist Card -->
+        <article class="liquid-glass" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <span class="user-role-badge" style="background: rgba(255, 159, 10, 0.15); color: var(--apple-orange);">1-DoF Sagittal</span>
+              <span style="font-size: 11px; color: var(--text-tertiary);">Direction Vector Pitch</span>
+            </div>
+            <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">Wrist Curl (Flexion / Extension)</h2>
+            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+              Tracks sagittal Bottom-to-Top wrist curl kinematics with custom ROM boundary calibration, synchronized with Forearm MyoWare 2.0 sEMG biofeedback.
+            </p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--track-border); padding-top: 14px;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-primary);">Calibrated Bottom &rarr; Top</span>
+            <a href="/rehab" onclick="localStorage.setItem('myomotion_target_mode', 'wrist');" class="liquid-btn" style="padding: 8px 14px; font-size: 12px;">
+              Launch Wrist Curl
+            </a>
+          </div>
+        </article>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div>&copy; <span id="copyright-year">2026</span> MyoMotion Clinical Systems &bull; All Rights Reserved</div>
+        <div class="footer-links">
+          <a href="/rehab">Rehab</a>
+          <a href="/history">History</a>
+          <a href="/settings">Settings</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/sitemap.xml">Sitemap</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

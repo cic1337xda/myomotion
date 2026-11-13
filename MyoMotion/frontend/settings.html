@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Device & System Settings — MyoMotion</title>
+  <meta name="description" content="Manage physical ESP32 wearable sensor nodes, register MAC addresses, and configure MQTT broker telemetry.">
+  <link rel="canonical" href="https://myomotion.flowkraft.xyz/settings">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Device & System Settings — MyoMotion">
+  <meta property="og:description" content="Manage physical ESP32 wearable sensor nodes, register MAC addresses, and configure MQTT broker telemetry.">
+  <meta property="og:url" content="https://myomotion.flowkraft.xyz/settings">
+  <meta property="og:image" content="https://myomotion.flowkraft.xyz/og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Device & System Settings — MyoMotion">
+  <meta name="twitter:description" content="Manage physical ESP32 wearable sensor nodes and MQTT broker telemetry.">
+  <meta name="twitter:image" content="https://myomotion.flowkraft.xyz/og-preview.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://myomotion.flowkraft.xyz/" },
+      { "@type": "ListItem", "position": 2, "name": "Device Settings", "item": "https://myomotion.flowkraft.xyz/settings" }
+    ]
+  }
+  </script>
+</head>
+<body class="dark">
+
+  <div class="ambient-glow">
+    <div class="ambient-sphere sphere-blue"></div>
+    <div class="ambient-sphere sphere-green"></div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <div class="app-layout">
+    <!-- Floating Liquid Glass Sidebar -->
+    <aside class="sidebar liquid-glass">
+      <div>
+        <div class="sidebar-brand">
+          <div class="brand-header">
+            <img src="/favicon.svg" alt="MyoMotion Logo" class="brand-logo">
+            <div>
+              <div class="brand-title">MyoMotion</div>
+              <div class="brand-sub">Clinical Biomechanics</div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main Navigation">
+          <a href="/" class="nav-item">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Overview</span>
+          </a>
+
+          <a href="/rehab" class="nav-item">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+            <span>Active Rehab</span>
+          </a>
+
+          <a href="/history" class="nav-item">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20v-6M6 20V10M18 20V4"></path>
+            </svg>
+            <span>History & Analytics</span>
+          </a>
+
+          <a href="/settings" class="nav-item active">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span>Device Settings</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-row">
+            <div class="user-meta">
+              <span id="sidebar-user-name" class="user-name">Loading...</span>
+              <span id="sidebar-user-role" class="user-role-badge">Physio</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button id="theme-toggle-btn" class="liquid-btn" style="flex: 1; padding: 6px 10px; font-size: 11px;">Theme</button>
+            <button id="sidebar-logout-btn" class="liquid-btn liquid-btn-danger" style="padding: 6px 10px; font-size: 11px;">Logout</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="top-header liquid-glass">
+        <div>
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <span class="current">Device Settings</span>
+          </nav>
+          <h1 class="page-title">Hardware Sensor Configuration</h1>
+        </div>
+      </header>
+
+      <!-- Grid: Add Device + Registered Nodes -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px;">
+        <!-- 1. Add Hardware Node Form -->
+        <section class="liquid-glass" style="padding: 24px;">
+          <h2 style="font-size: 17px; font-weight: 700; margin-bottom: 6px;">Register New Sensor Node</h2>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">
+            Input the 12-digit MAC Address of your ESP32 board. The system automatically listens for MQTT Last Will and Testament (LWT) packets.
+          </p>
+
+          <form id="add-device-form">
+            <div class="input-group">
+              <label for="add-device-mac" class="input-label">ESP32 MAC Address</label>
+              <input type="text" id="add-device-mac" class="liquid-input" placeholder="e.g. CC7B5C284994 or CC:7B:5C:28:49:94" required>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 22px;">
+              <label for="add-device-name" class="input-label">Device Label</label>
+              <input type="text" id="add-device-name" class="liquid-input" placeholder="Arm Sleeve #1" value="MyoMotion Sensor Node">
+            </div>
+
+            <button type="submit" class="liquid-btn liquid-btn-primary" style="width: 100%; padding: 11px; font-size: 13px;">
+              + Link Sensor Node
+            </button>
+          </form>
+        </section>
+
+        <!-- 2. Registered Hardware Devices List -->
+        <section class="liquid-glass" style="padding: 24px; display: flex; flex-direction: column;">
+          <h2 style="font-size: 17px; font-weight: 700; margin-bottom: 6px;">Connected Wearable Nodes</h2>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
+            Hardware devices associated with your clinician account.
+          </p>
+
+          <div id="devices-list-container" style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+            <div style="padding: 20px; text-align: center; color: var(--text-tertiary);">Loading registered nodes...</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- System Architecture & Telemetry Specs -->
+      <section class="liquid-glass" style="padding: 24px;">
+        <h2 style="font-size: 17px; font-weight: 700; margin-bottom: 14px;">Telemetry &amp; Kinematic Pipeline Parameters</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+          <div style="background: var(--track-bg); padding: 14px; border-radius: var(--squircle-sm); border: 1px solid var(--track-border);">
+            <div style="font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; font-weight: 700;">Streaming Rate</div>
+            <div style="font-size: 18px; font-weight: 800; margin-top: 4px; color: var(--apple-blue);">20 Hz (50ms)</div>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Sub-millisecond UDP/TCP</div>
+          </div>
+
+          <div style="background: var(--track-bg); padding: 14px; border-radius: var(--squircle-sm); border: 1px solid var(--track-border);">
+            <div style="font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; font-weight: 700;">Filter Smoothing</div>
+            <div style="font-size: 18px; font-weight: 800; margin-top: 4px; color: var(--apple-green);">&alpha; = 0.20 EMA</div>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Exponential Moving Average</div>
+          </div>
+
+          <div style="background: var(--track-bg); padding: 14px; border-radius: var(--squircle-sm); border: 1px solid var(--track-border);">
+            <div style="font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; font-weight: 700;">IMU Fusion Mode</div>
+            <div style="font-size: 18px; font-weight: 800; margin-top: 4px; color: var(--apple-orange);">IMUPLUS (6-DoF)</div>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Magnetometer decoupled</div>
+          </div>
+
+          <div style="background: var(--track-bg); padding: 14px; border-radius: var(--squircle-sm); border: 1px solid var(--track-border);">
+            <div style="font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; font-weight: 700;">MQTT Topics</div>
+            <div style="font-size: 14px; font-weight: 700; margin-top: 4px; font-family: monospace; color: var(--text-primary);">myomotion/data/&lt;MAC&gt;</div>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">LWT on myomotion/status/&lt;MAC&gt;</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div>&copy; <span id="copyright-year">2026</span> MyoMotion Clinical Systems &bull; All Rights Reserved</div>
+        <div class="footer-links">
+          <a href="/">Overview</a>
+          <a href="/rehab">Active Rehab</a>
+          <a href="/history">History</a>
+          <a href="/privacy">Privacy Policy</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

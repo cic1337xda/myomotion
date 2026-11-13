@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://myomotion.flowkraft.xyz/sitemap.xml

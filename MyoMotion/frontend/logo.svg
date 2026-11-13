@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="blueGrad" x1="34" y1="24" x2="34" y2="66" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A84FF" />
+      <stop offset="100%" stop-color="#0066CC" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="34" y1="66" x2="68" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A84FF" />
+      <stop offset="100%" stop-color="#32D74B" />
+    </linearGradient>
+  </defs>
+  <!-- Background Squircle -->
+  <rect width="100" height="100" rx="24" fill="#0E1117" />
+  <rect width="98" height="98" x="1" y="1" rx="23" stroke="rgba(255,255,255,0.14)" stroke-width="2" />
+  
+  <!-- Joint Pivot -->
+  <circle cx="34" cy="66" r="8" fill="url(#blueGrad)" />
+  <circle cx="34" cy="66" r="4" fill="#FFFFFF" />
+
+  <!-- Upper Arm Link (Vertical) -->
+  <line x1="34" y1="66" x2="34" y2="24" stroke="url(#blueGrad)" stroke-width="6" stroke-linecap="round" />
+  <circle cx="34" cy="24" r="5" fill="#0A84FF" />
+
+  <!-- Forearm Articulation Link (45 degree flex) -->
+  <line x1="34" y1="66" x2="68" y2="38" stroke="url(#glowGrad)" stroke-width="6" stroke-linecap="round" />
+  <circle cx="68" cy="38" r="5" fill="#32D74B" />
+
+  <!-- Biomechanical Angle Arc -->
+  <path d="M 34 46 A 20 20 0 0 1 50 54" fill="none" stroke="#32D74B" stroke-width="3" stroke-dasharray="3,3" stroke-linecap="round" />
+
+  <!-- EMG Pulse Icon in bottom-right -->
+  <path d="M 62 76 L 68 76 L 72 68 L 76 84 L 80 72 L 84 76 L 90 76" fill="none" stroke="#0A84FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

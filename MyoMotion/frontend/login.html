@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinical Authorization Gateway — MyoMotion</title>
+  <meta name="description" content="Secure clinical login and registration gateway for MyoMotion upper-limb rehabilitation platform.">
+  <link rel="canonical" href="https://myomotion.flowkraft.xyz/login">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Clinical Authorization Gateway — MyoMotion">
+  <meta property="og:description" content="Secure clinical login and OTP registration gateway for MyoMotion upper-limb rehabilitation platform.">
+  <meta property="og:url" content="https://myomotion.flowkraft.xyz/login">
+  <meta property="og:image" content="https://myomotion.flowkraft.xyz/og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Clinical Authorization Gateway — MyoMotion">
+  <meta name="twitter:description" content="Secure clinical login and OTP registration gateway for MyoMotion.">
+  <meta name="twitter:image" content="https://myomotion.flowkraft.xyz/og-preview.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="dark" style="display: flex; flex-direction: column; min-height: 100vh;">
+
+  <div class="ambient-glow">
+    <div class="ambient-sphere sphere-blue"></div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <!-- Header Bar -->
+  <header style="width: 100%; margin: 0; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="/favicon.svg" alt="MyoMotion Logo" style="width: 28px; height: 28px; border-radius: 7px;">
+      <span style="font-size: 14px; font-weight: 800; letter-spacing: -0.01em;">MYOMOTION MEDICAL</span>
+    </div>
+    <button id="theme-toggle-btn" class="liquid-btn" style="padding: 6px 12px; font-size: 12px;">Theme</button>
+  </header>
+
+  <!-- Login Modal -->
+  <main style="display: flex; justify-content: center; align-items: center; flex: 1; padding: 16px;">
+    <div class="liquid-glass liquid-glass-modal" style="width: 100%; max-width: 460px; padding: 34px 30px;">
+      
+      <!-- 1. SIGN IN VIEW -->
+      <section id="login-view">
+        <h1 style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px;">Clinician Sign In</h1>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 22px;">Access the real-time neuromuscular rehabilitation console.</p>
+
+        <form id="login-form">
+          <div class="input-group">
+            <label for="login-email" class="input-label">Email Address or Username</label>
+            <input type="text" id="login-email" class="liquid-input" placeholder="clinician@mail.flowkraft.xyz" required autocomplete="email">
+          </div>
+
+          <div class="input-group" style="margin-bottom: 22px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label for="login-password" class="input-label">Password</label>
+              <a href="#" onclick="switchView('forgot'); return false;" style="font-size: 12px; color: var(--apple-blue); text-decoration: none;">Forgot?</a>
+            </div>
+            <input type="password" id="login-password" class="liquid-input" placeholder="••••••••••••" required autocomplete="current-password">
+          </div>
+
+          <button type="submit" id="login-submit-btn" class="liquid-btn liquid-btn-primary" style="width: 100%; padding: 12px; font-size: 14px;">
+            Sign In
+          </button>
+        </form>
+
+        <div style="margin-top: 22px; text-align: center; font-size: 13px; color: var(--text-secondary);">
+          New to MyoMotion? <a href="#" onclick="switchView('register'); return false;" style="color: var(--apple-blue); font-weight: 600; text-decoration: none;">Create Account</a>
+        </div>
+      </section>
+
+      <!-- 2. REGISTER VIEW -->
+      <section id="register-view" style="display: none;">
+        <h1 style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px;">Create Clinician Account</h1>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">A 6-digit verification code will be sent via Resend.</p>
+
+        <form id="register-form">
+          <div class="input-group">
+            <label for="reg-username" class="input-label">Full Name / Identifier</label>
+            <input type="text" id="reg-username" class="liquid-input" placeholder="Dr. Faris" required>
+          </div>
+
+          <div class="input-group">
+            <label for="reg-email" class="input-label">Email Address</label>
+            <input type="email" id="reg-email" class="liquid-input" placeholder="name@domain.com" required autocomplete="email">
+          </div>
+
+          <div class="input-group" style="margin-bottom: 22px;">
+            <label for="reg-password" class="input-label">Password (Min 8 chars, Upper, Lower, Number, Symbol)</label>
+            <input type="password" id="reg-password" class="liquid-input" placeholder="••••••••••••" required autocomplete="new-password">
+            <div class="strength-meter">
+              <div id="reg-strength-bar" class="strength-bar"></div>
+            </div>
+            <div id="reg-strength-text" class="strength-text"></div>
+          </div>
+
+          <button type="submit" id="reg-submit-btn" class="liquid-btn liquid-btn-primary" style="width: 100%; padding: 12px; font-size: 14px;">
+            Continue
+          </button>
+        </form>
+
+        <div style="margin-top: 20px; text-align: center; font-size: 13px; color: var(--text-secondary);">
+          Already have an account? <a href="#" onclick="switchView('login'); return false;" style="color: var(--apple-blue); font-weight: 600; text-decoration: none;">Sign In</a>
+        </div>
+      </section>
+
+      <!-- 3. OTP VERIFICATION VIEW -->
+      <section id="otp-view" style="display: none;">
+        <h1 style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">Verify Identity</h1>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">
+          Enter the 6-digit code dispatched to <strong id="otp-target-email" style="color: var(--text-primary);"></strong>.
+        </p>
+
+        <form id="otp-form">
+          <div class="input-group" style="margin-bottom: 22px;">
+            <input type="text" id="otp-input" class="liquid-input" maxlength="6" placeholder="123456" 
+                   style="text-align: center; font-size: 26px; font-weight: 800; letter-spacing: 0.3em; font-family: monospace;" required autocomplete="one-time-code">
+          </div>
+
+          <button type="submit" id="otp-submit-btn" class="liquid-btn liquid-btn-primary" style="width: 100%; padding: 12px; font-size: 14px; margin-bottom: 10px;">
+            Activate &amp; Enter
+          </button>
+
+          <button type="button" id="resend-otp-btn" class="liquid-btn" style="width: 100%; padding: 10px; font-size: 12px;">
+            Resend Verification Code
+          </button>
+        </form>
+
+        <div style="margin-top: 18px; text-align: center; font-size: 13px;">
+          <a href="#" onclick="switchView('login'); return false;" style="color: var(--text-tertiary); text-decoration: none;">&larr; Cancel</a>
+        </div>
+      </section>
+
+      <!-- 4. FORGOT PASSWORD VIEW -->
+      <section id="forgot-view" style="display: none;">
+        <h1 style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">Password Recovery</h1>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">Enter your registered email to receive a recovery code.</p>
+
+        <form id="forgot-form">
+          <div class="input-group" style="margin-bottom: 22px;">
+            <label for="forgot-email" class="input-label">Email Address</label>
+            <input type="email" id="forgot-email" class="liquid-input" placeholder="name@domain.com" required autocomplete="email">
+          </div>
+
+          <button type="submit" id="forgot-submit-btn" class="liquid-btn liquid-btn-primary" style="width: 100%; padding: 12px; font-size: 14px;">
+            Send Recovery Code
+          </button>
+        </form>
+
+        <div style="margin-top: 18px; text-align: center; font-size: 13px;">
+          <a href="#" onclick="switchView('login'); return false;" style="color: var(--apple-blue); font-weight: 600; text-decoration: none;">&larr; Back to Login</a>
+        </div>
+      </section>
+
+      <!-- 5. RESET PASSWORD VIEW -->
+      <section id="reset-view" style="display: none;">
+        <h1 style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px;">Set New Password</h1>
+
+        <form id="reset-form">
+          <input type="hidden" id="reset-email-hidden">
+
+          <div class="input-group">
+            <label for="reset-otp-code" class="input-label">6-Digit Code</label>
+            <input type="text" id="reset-otp-code" class="liquid-input" maxlength="6" placeholder="123456" required>
+          </div>
+
+          <div class="input-group" style="margin-bottom: 22px;">
+            <label for="reset-new-password" class="input-label">New Password</label>
+            <input type="password" id="reset-new-password" class="liquid-input" placeholder="••••••••••••" required>
+            <div class="strength-meter">
+              <div id="reset-strength-bar" class="strength-bar"></div>
+            </div>
+            <div id="reset-strength-text" class="strength-text"></div>
+          </div>
+
+          <button type="submit" id="reset-submit-btn" class="liquid-btn liquid-btn-primary" style="width: 100%; padding: 12px; font-size: 14px;">
+            Save Password
+          </button>
+        </form>
+
+        <div style="margin-top: 18px; text-align: center; font-size: 13px;">
+          <a href="#" onclick="switchView('login'); return false;" style="color: var(--apple-blue); font-weight: 600; text-decoration: none;">&larr; Cancel</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer" style="width: 100%; max-width: none; margin: auto 0 0 0; padding: 20px 24px; border-top: none; justify-content: space-between; gap: 16px;">
+    <div>&copy; <span id="copyright-year">2026</span> MyoMotion Clinical Systems</div>
+    <div class="footer-links">
+      <a href="/privacy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script src="/auth.js"></script>
+</body>
+</html>

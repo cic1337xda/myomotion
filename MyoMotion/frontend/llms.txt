@@ -1,0 +1,11 @@
+# MyoMotion - Upper-Limb Neuromuscular & Kinematic Rehabilitation Platform
+> Real-time biomedical tracking platform monitoring elbow & wrist joints coupled with biceps & forearm sEMG biofeedback.
+
+## Technical Specifications
+- Microcontroller: ESP32 DevKit
+- Inertial Measurement: 2x Bosch Sensortec BNO055 (I2C Bus 0: SDA 21, SCL 22; I2C Bus 1: SDA 18, SCL 19) in OPERATION_MODE_IMUPLUS.
+- Biomechanical Kinematics: 3D Quaternion Relative Displacement (Elbow) & Sagittal Pitch Direction Vector Projection (Wrist Curl).
+- Electromyography: MyoWare 2.0 12-bit sEMG ENV sensor with Relax Baseline (0%) and Max Grip Peak (100%) %MVC normalization.
+- Transport: Eclipse Mosquitto MQTT broker with Last Will and Testament (LWT) & WebSocket telemetry streaming.
+- Backend: FastAPI, PostgreSQL 15, SlowAPI Rate Limiting, Resend OTP Service.
+- UI: Apple Liquid Glass aesthetic, Roboto typography, articulated real-time canvas arm simulation.

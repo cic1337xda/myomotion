@@ -1,0 +1,44 @@
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+.python-version
+
+# Pre-Production, Test Scripts & Sockets
+Pre-production Code/
+test_*.py
+*.sock
+
+# Local / Private Development Folders
+Esp32 Code/
+Esp32-code/
+
+# Database & Persistent Storage
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment Variables & Secrets (Keep .env.example)
+.env
+MyoMotion/.env
+.env.local
+.env.*.local
+resendapi.txt
+
+# Session Logs & Work Artifacts
+ocsession.txt
+*.log
+
+# Docker, IDE & OS Artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~

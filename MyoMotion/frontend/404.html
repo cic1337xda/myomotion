@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Page Not Found — MyoMotion</title>
+  <meta name="description" content="The requested MyoMotion clinical resource could not be found.">
+  <link rel="canonical" href="https://myomotion.flowkraft.xyz/404">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="dark">
+
+  <div class="ambient-glow">
+    <div class="ambient-sphere sphere-blue"></div>
+  </div>
+
+  <div class="standalone-page">
+    <header class="standalone-header liquid-glass">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="/favicon.svg" alt="MyoMotion Logo" style="width: 26px; height: 26px; border-radius: 6px;">
+        <span style="font-size: 15px; font-weight: 800;">MyoMotion</span>
+      </div>
+      <a href="/" class="liquid-btn" style="padding: 6px 14px; font-size: 12px;">Home</a>
+    </header>
+
+    <main class="standalone-main liquid-glass" style="padding: 60px 30px; text-align: center; justify-content: center; align-items: center;">
+      <div style="font-size: 72px; font-weight: 900; letter-spacing: -0.04em; color: var(--apple-blue); line-height: 1; margin-bottom: 14px;">
+        404
+      </div>
+      <h1 style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px;">Kinematic Stream Not Found</h1>
+      <p style="font-size: 14px; color: var(--text-secondary); max-width: 420px; line-height: 1.6; margin-bottom: 26px;">
+        The clinical route or rehabilitation session endpoint you are attempting to locate does not exist or has been archived.
+      </p>
+      <a href="/" class="liquid-btn liquid-btn-primary" style="padding: 12px 24px; font-size: 14px;">
+        &larr; Return to Dashboard Overview
+      </a>
+    </main>
+
+    <footer class="footer" style="border-top: none;">
+      <div>&copy; <span id="copyright-year">2026</span> MyoMotion Clinical Systems &bull; flowkraft.xyz</div>
+      <div class="footer-links">
+        <a href="/">Overview</a>
+        <a href="/privacy">Privacy</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("copyright-year").textContent = new Date().getFullYear();
+    const savedTheme = localStorage.getItem("myomotion_theme") || "dark";
+    if (savedTheme === "light") document.body.classList.remove("dark");
+  </script>
+</body>
+</html>
